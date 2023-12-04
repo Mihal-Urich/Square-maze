@@ -33,10 +33,6 @@ def PaintMaze(size_maze, Vmaze, Hmaze, wall):
 
 
 def PaintPath():
-    Vmaze_flat = [item for sublist in Vmaze for item in sublist]
-    Hmaze_flat = [item for sublist in Hmaze for item in sublist]
-    Vmaze_array = (ctypes.c_short * len(Vmaze_flat))(*Vmaze_flat)
-    Hmaze_array = (ctypes.c_short * len(Hmaze_flat))(*Hmaze_flat)
     CoordFind_array = (ctypes.c_short * len(CoordFind))(*CoordFind)
     FindArray = ctypes.cast(testpp.PFind(fp, mz, CoordFind_array),
                             ctypes.POINTER(ctypes.c_short))
@@ -50,7 +46,7 @@ def PaintPath():
             sf, GREEN, pairs[i], pairs[i + 1], 3)
 
 
-testpp = ctypes.CDLL('libtestpp.so')
+testpp = ctypes.CDLL('libmaz.so')
 testpp.MazeGenNew.restype = ctypes.c_void_p
 testpp.PGen.argtypes = [ctypes.c_void_p, ctypes.c_short, ctypes.c_short]
 testpp.PVert.restype = ctypes.POINTER(ctypes.c_short)
